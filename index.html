@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="Style/Style.css" />
+    <link rel="stylesheet" href="Style/Keyframes.css" />
+    <link rel="stylesheet" href="Style/Animations.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="book">
+      <br />
+      <span id="book-page">
+        <span id="firstpage">
+          <h3 class="center sync-first-element">
+            <a
+              class="hyperlink"
+              data-href-html="Anasayfa.html"
+              data-span-id="firstpage"
+            >
+              Anasayfa
+            </a>
+          </h3>
+        </span>
+        <br />
+        <span id="secondpage">
+          <h3 class="center sync-first-element">
+            <a
+              id="ürünlerimiz"
+              class="hyperlink"
+              data-href-html="Ürünlerimiz.html"
+              data-span-id="secondpage"
+            >
+              Ürünlerimiz
+            </a>
+          </h3>
+        </span>
+        <br />
+        <span id="thirdpage">
+          <h3 class="center sync-first-element">
+            <a
+              class="hyperlink"
+              data-href-html="Hakkımızda.html"
+              data-span-id="thirdpage"
+            >
+              Hakkımızda
+            </a>
+          </h3>
+        </span>
+      </span>
+
+      <div id="afterbook"></div>
+    </div>
+
+    <script>
+      var bookpage = $("#book-page").html();
+
+      function refresh() {
+        $(".hyperlink").click(function (e) {
+          if ($(".book").hasClass("go-higher-class")) {
+            // Minimal Pages
+
+            e.stopPropagation();
+            Minimalize();
+          } else {
+            // Full Page
+
+            //make full page
+            $(".book").removeClass("go-smaller-class");
+            $(".book").addClass("go-higher-class");
+
+            //get href attr before change innerHTML
+            var hrefHTML = $(this).attr("data-href-html");
+            //change movement top bar
+            $("#book-page").html($(`#${$(this).attr("data-span-id")}`).html());
+            //after one second will fill content
+            setTimeout(function () {
+              $("#afterbook").load(hrefHTML);
+              $("#afterbook").addClass("to-visible");
+              $(".book").attr("style", "height: 100%vh !important");
+
+              //if ($(".book").attr("height") > screen.height)
+
+              setTimeout(function () {
+                if ($(".book")[0].scrollHeight > screen.height) {
+                  $(".book").attr("style", "height: 100% !important");
+                }
+              }, 1400);
+
+              e.stopPropagation();
+              refresh();
+            }, 200);
+          }
+        });
+      }
+
+      function Minimalize() {
+        $(".book").attr("style", "");
+        $(".book").removeClass("go-higher-class");
+        $(".book").addClass("go-smaller-class");
+        $("#afterbook").removeClass("to-visible");
+
+        //clear content
+        $("#afterbook").html("");
+
+        //after one second will fill movement page
+        setTimeout(function () {
+          $("#book-page").html(bookpage);
+          refresh();
+        }, 1000);
+      }
+
+      function Maximize(id) {
+        $(".book").removeClass("go-smaller-class");
+        $(".book").addClass("go-higher-class");
+
+        //get href attr before change innerHTML
+        var hrefHTML = $(`#${id}`).attr("data-href-html");
+        //change movement top bar
+        $("#book-page").html($(`#${$(`#${id}`).attr("data-span-id")}`).html());
+        //after one second will fill content
+        setTimeout(function () {
+          $("#afterbook").load(hrefHTML);
+          $("#afterbook").addClass("to-visible");
+          $(".book").attr("style", "height: 100%vh !important");
+
+          //if ($(".book").attr("height") > screen.height)
+
+          setTimeout(function () {
+            if ($(".book")[0].scrollHeight > screen.height) {
+              $(".book").attr("style", "height: 100% !important");
+            }
+          }, 1400);
+          refresh();
+        });
+      }
+
+      function MinAndMax(id){
+        Minimalize();
+        setTimeout(function () {
+          Maximize(id);
+        }, 1750);
+      }
+
+      refresh();
+    </script>
+  </body>
+</html>

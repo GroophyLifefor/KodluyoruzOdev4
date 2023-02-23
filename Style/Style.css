@@ -1,0 +1,29 @@
+html body {
+  margin: 0;
+  background-color: rgb(222, 235, 239);
+}
+
+.center {
+  text-align: center;
+}
+
+.sync-first-element {
+  padding: 0px;
+  margin: 0px;
+  line-height: 100%;
+}
+
+.hyperlink {
+  text-decoration: underline;
+  cursor: pointer;
+  color: rgb(86, 27, 139);
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.hyperlink:active {
+  color: red;
+}

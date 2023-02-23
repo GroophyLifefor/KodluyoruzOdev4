@@ -1,0 +1,39 @@
+<div class="center">
+  <h1 style="color: red">Müzik Dükkanım</h1>
+  <h4>
+    Müzik dükkanım sitemize hoşgeldiniz! Bu sitede çeşitli müzik aletlerini
+    bulabilirsiniz. Uygun fiyatlarımız ve kaliteli ürünlerimiz için
+    <span class="hypergo">ürünlerimiz</span>
+    sayfamızı ziyaret ediniz.
+  </h4>
+  <h3>Sitemizde bulunan müzik aletleri</h3>
+  <ul style="list-style-position: inside">
+    <li>Gitar</li>
+    <li>Davul</li>
+    <li>Piyano</li>
+    <li>Keman</li>
+  </ul>
+</div>
+
+<style>
+  .hypergo {
+    text-decoration: underline;
+    cursor: pointer;
+    color: rgb(86, 27, 139);
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .hypergo:active {
+    color: red;
+  }
+</style>
+
+<script>
+  $(".hypergo").click(function (e) {
+    MinAndMax("ürünlerimiz");
+  });
+</script>
